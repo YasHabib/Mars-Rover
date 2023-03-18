@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Mars-Rover.WebApp.props" />
+</Project>

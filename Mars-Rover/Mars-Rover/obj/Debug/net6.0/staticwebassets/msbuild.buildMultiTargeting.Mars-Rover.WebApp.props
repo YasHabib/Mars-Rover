@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Mars-Rover.WebApp.props" />
+</Project>

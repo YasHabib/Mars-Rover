@@ -1,0 +1,88 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Mars-Rover.Services/1.0.0": {
+        "dependencies": {
+          "Mars-Rover.WebApp": "1.0.0"
+        },
+        "runtime": {
+          "Mars-Rover.Services.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.2": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.2.27524"
+          }
+        }
+      },
+      "Syncfusion.EJ2.AspNet.Core/20.4.0.54": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.2",
+          "Syncfusion.Licensing": "20.4.0.54"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Syncfusion.EJ2.dll": {
+            "assemblyVersion": "20.4.0.54",
+            "fileVersion": "20.4.0.54"
+          }
+        }
+      },
+      "Syncfusion.Licensing/20.4.0.54": {
+        "runtime": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {
+            "assemblyVersion": "20.4.0.54",
+            "fileVersion": "20.4.0.54"
+          }
+        }
+      },
+      "Mars-Rover.WebApp/1.0.0": {
+        "dependencies": {
+          "Syncfusion.EJ2.AspNet.Core": "20.4.0.54"
+        },
+        "runtime": {
+          "Mars-Rover.WebApp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Mars-Rover.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-R2pZ3B0UjeyHShm9vG+Tu0EBb2lC8b0dFzV9gVn50ofHXh9Smjk6kTn7A/FdAsC8B5cKib1OnGYOXxRBz5XQDg==",
+      "path": "newtonsoft.json/13.0.2",
+      "hashPath": "newtonsoft.json.13.0.2.nupkg.sha512"
+    },
+    "Syncfusion.EJ2.AspNet.Core/20.4.0.54": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QcjuD6Qor46FDYdx4FfUsio8DH1lVEmsErqOMj2MvW2NGtXsBlZQquAoRcMdEXGSUF3zzVde77j9A/M1iYFYjw==",
+      "path": "syncfusion.ej2.aspnet.core/20.4.0.54",
+      "hashPath": "syncfusion.ej2.aspnet.core.20.4.0.54.nupkg.sha512"
+    },
+    "Syncfusion.Licensing/20.4.0.54": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-16K5slTnWZ2UTTG2PWnw8WUS09EW/+KZy3kFVVAmkx9o6/Ik7xklD58BopZ9f3v93J4R3Ki+o4yCDLekIOx7cw==",
+      "path": "syncfusion.licensing/20.4.0.54",
+      "hashPath": "syncfusion.licensing.20.4.0.54.nupkg.sha512"
+    },
+    "Mars-Rover.WebApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

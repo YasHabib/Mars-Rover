@@ -26,6 +26,7 @@ namespace Mars_Rover.Services.Services
             _unitOfWork.Rovers.Create(rover);
             await _unitOfWork.SaveAsync();
         }
+        
 
         //----------------------Read-------------------------//
 
@@ -49,10 +50,7 @@ namespace Mars_Rover.Services.Services
         
         public async Task<string> GetOutput(RoverInputsVIewModel roverInputs)
         {
-
-            //Scope: A rover should turn L, R or move M from their Initial position and Orientation (0,0,N)
-
-            var rover = await _unitOfWork.Rovers.GetById(roverInputs.RoverId);
+            //var rover = await _unitOfWork.Rovers.GetById(roverInputs.RoverId);
 
             //storing the input data in-memory
             //var roverPositionData = new RoverPosition(roverInputs, rover.Id, output);
@@ -63,10 +61,7 @@ namespace Mars_Rover.Services.Services
 
 
             //------------Setting initial position and location of rover------------
-            string[] roverPosition = roverInputs.RoverPosition.Split(" ");
-
-            //conveting x/ y coordinates to int for rover's initial positon
-
+            string[] roverPosition = roverInputs.InitialPosition.Split(" ");
 
             int positionX;
             int positionY;
@@ -74,39 +69,94 @@ namespace Mars_Rover.Services.Services
             Int32.TryParse(roverPosition[1], out positionY);
             var positionOrientation = roverPosition[2];
 
-
             //---------Breaking down rover instruction---------------
             char[] routeInstruction = roverInputs.RouteInstructions.ToCharArray();
-            string direction;
-            int coordinate;
 
             for (int i = 0; i<routeInstruction.Length; i++)
             {
 
-                switch(routeInstruction[i])
+                //switch(routeInstruction[i])
+                //{
+                //    case 'L': 
+                //        newOrientation = TurnLeft(positionOrientation);           
+                //        break;
+                //    case 'R': 
+                //        newOrientation = TurnRight(positionOrientation); 
+                //        break;
+                //    case 'M': 
+                //        xyCheck = MoveForward(positionX, positionY, positionOrientation); 
+                //        //if X coordinate has changed
+                //        if(xyCheck == positionX)
+                //        {
+                //            newPositionX = xyCheck; newPositionY = positionY;
+                //        }
+                //        else
+                //        {
+                //            newPositionY = xyCheck; newPositionX = positionX;
+                //        }
+                //        break;
+                //    default: throw new Exception("Unidefined parameter entered, please use either L, R or M");
+
+                switch (routeInstruction[i])
                 {
-                    case 'L': direction = TurnLeft(positionOrientation); break;
-                    case 'R': direction = TurnRight(positionOrientation); break;
-                    case 'M': coordinate = MoveForward(positionX, positionY, positionOrientation); break;
+                    case 'L':
+                        switch (positionOrientation)
+                        {
+                            case "N":
+                                positionOrientation = "W"; break;
+                            case "W":
+                                positionOrientation = "S"; break;
+                            case "S":
+                                positionOrientation = "E"; break;
+                            case "E":
+                                positionOrientation = "N"; break;
+                            default:
+                                throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
+                        }
+                        break;
+                    case 'R':
+                        switch (positionOrientation)
+                        {
+                            case "N":
+                                positionOrientation = "E"; break;
+                            case "E":
+                                positionOrientation = "S"; break;
+                            case "S":
+                                positionOrientation = "W"; break;
+                            case "W":
+                                positionOrientation= "N"; break;
+                            default:
+                                throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
+                        }
+                        break;
+                    case 'M':
+                        switch (positionOrientation)
+                        {
+                            case "N":
+                                positionY += 1; break;
+                            case "E":
+                                positionX += 1; break;
+                            case "S":
+                                positionY -= 1; break;
+                            case "W":
+                                positionX -= 1; break;
+                            default:
+                                throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
+                        }
+                        break;
                     default: throw new Exception("Unidefined parameter entered, please use either L, R or M");
                 }
             }
 
-            //var output = coordinate + " " + direction;
-            //return output;
+            var output = positionX.ToString() + " " + positionY.ToString() + " "+ positionOrientation;
 
-            //var pattern = @"(L|R|M)";
-
-
-
-            //-------------------Generating output-------------------
-
-
+            return output;
 
             throw new NotImplementedException();
 
 
         }
+
         //----------------------Update-------------------------//
 
         public Task<Coordinates> RoverDestination(string routeInstruction)
@@ -137,71 +187,66 @@ namespace Mars_Rover.Services.Services
         }
 
 
-        //-----------Helper methods------------
-        public string TurnLeft(string currentOrientation)
-        {
-            string newOrientation;
-            switch(currentOrientation)
-            {
-                case "N":
-                    newOrientation = "W";
-                    return newOrientation;
-                case "W":
-                    newOrientation = "S"; 
-                    return newOrientation;
-                case "S":
-                    newOrientation = "E"; 
-                    return newOrientation;
-                case "E":
-                    newOrientation = "N"; 
-                    return newOrientation;
-                default:
-                    throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
+        ////-----------Helper methods------------
+        //public string TurnLeft(string currentOrientation)
+        //{
+        //    switch(currentOrientation)
+        //    {
+        //        case "N":
+        //            currentOrientation = "W";
+        //            return currentOrientation;
+        //        case "W":
+        //            currentOrientation = "S"; 
+        //            return currentOrientation;
+        //        case "S":
+        //            currentOrientation = "E"; 
+        //            return currentOrientation;
+        //        case "E":
+        //            currentOrientation = "N"; 
+        //            return currentOrientation;
+        //        default:
+        //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
 
-            }
-        }
+        //    }
+        //}
 
-        public string TurnRight(string currentOrientation)
-        {
-            string newOrientation;
-            switch (currentOrientation)
-            {
-                case "N":
-                    newOrientation = "E";
-                    return newOrientation;
-                case "E":
-                    newOrientation = "S";
-                    return newOrientation;
-                case "S":
-                    newOrientation = "W";
-                    return newOrientation;
-                case "W":
-                    newOrientation = "N";
-                    return newOrientation;
-                default:
-                    throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
-            }
-        }
+        //public string TurnRight(string currentOrientation)
+        //{
+        //    switch (currentOrientation)
+        //    {
+        //        case "N":
+        //            currentOrientation = "E";
+        //            return currentOrientation;
+        //        case "E":
+        //            currentOrientation = "S";
+        //            return currentOrientation;
+        //        case "S":
+        //            currentOrientation = "W";
+        //            return currentOrientation;
+        //        case "W":
+        //            currentOrientation = "N";
+        //            return currentOrientation;
+        //        default:
+        //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
+        //    }
+        //}
 
-        public int MoveForward(int x, int y, string orientation) 
-        {
+        //public int MoveForward(int x, int y, string orientation) 
+        //{
 
-            //int newX;
-            //int newY;
-            //string newOrientation;  
-            switch (orientation)
-            {
-                case "N":
-                    y += 1; return y;
-                case "E":
-                    x += 1; return x;
-                case "S":
-                    y -= 1; return y;
-                case "W":
-                    x -= 1; return x;
-                default:
-                    throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
-            }
-        }
+        //    switch (orientation)
+        //    {
+        //        case "N":
+        //            y += 1; return y;
+        //        case "E":
+        //            x += 1; return x;
+        //        case "S":
+        //            y -= 1; return y;
+        //        case "W":
+        //            x -= 1; return x;
+        //        default:
+        //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
+        //    }
+        //}
     }
 }

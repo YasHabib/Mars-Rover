@@ -11,14 +11,14 @@ namespace Mars_Rover.Models.Entities
         public RoverPosition(RoverInputsVIewModel roverData, Guid roverId, string output)
         {
             RoverId = roverId;
-            UserInput = roverData.RoverPosition + ": " + roverData.RouteInstructions;
+            UserInput = roverData.InitialPosition + ": " + roverData.RouteInstructions;
             OutputResult = output;
 
         }
         public Guid RoverId { get; set; }
         public Rover Rover { get; set; }
         public string UserInput { get; set; } = string.Empty;
-        public string ScreenshotIds { get; set; } = string.Empty;
+        //public string ScreenshotIds { get; set; } = string.Empty;
         public string OutputResult { get; set; } = string.Empty;
         public DateTime CreatedDate { get; set; }
 

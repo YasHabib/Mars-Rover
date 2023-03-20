@@ -43,29 +43,20 @@ namespace Mars_Rover.Controllers
         [HttpPost("inputs")]
         public async Task<ActionResult<string>> GetOutputBasedOnRoverInputs(RoverInputsVIewModel roverInputs)
         {
-            //Getting upper right corner coordinates
-            //string[] upperLimit = roverInputs.UpperCoordinates.Split(" ");
-            //var upperX = Int32.Parse(upperLimit[0]);
-            //var upperY = Int32.Parse(upperLimit[1]);
-            //await _roverInterface.ResizeGrid(upperX, upperY);
-
             //Getting rover's current position
-            string[] roverPosition = roverInputs.RoverPosition.Split(" ");
-            //int positionX = Int32.Parse(roverPosition[0]);
-            //int positionY = Int32.Parse(roverPosition[1]);
+            //string[] roverPosition = roverInputs.InitialPosition.Split(" ");
+            //int positionX;
+            //int positionY;
+            //Int32.TryParse(roverPosition[0], out positionX);
+            //Int32.TryParse(roverPosition[1], out positionY);
             //var positionOrientation = roverPosition[2];
-            int positionX;
-            int positionY;
-            Int32.TryParse(roverPosition[0], out positionX);
-            Int32.TryParse(roverPosition[1], out positionY);
-            var positionOrientation = roverPosition[2];
 
-            _roverInterface.TurnLeft(positionOrientation);
-            _roverInterface.TurnRight(positionOrientation);
-            _roverInterface.MoveForward(positionX, positionY, positionOrientation);
+            //_roverInterface.TurnLeft(positionOrientation);
+            //_roverInterface.TurnRight(positionOrientation);
+            //_roverInterface.MoveForward(positionX, positionY, positionOrientation);
             
 
-            await _roverInterface.SetInitialPosition(positionX, positionY, positionOrientation);
+            //await _roverInterface.SetInitialPosition(positionX, positionY, positionOrientation);
 
             var output = await _roverInterface.GetOutput(roverInputs);
             return output;

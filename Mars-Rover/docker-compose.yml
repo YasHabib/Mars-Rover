@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  mars-rover.webapp:
+    image: ${DOCKER_REGISTRY-}marsroverwebapp
+    build:
+      context: .
+      dockerfile: Mars-Rover/Dockerfile
+
+  mars-rover.api:
+    image: ${DOCKER_REGISTRY-}marsroverapi
+    build:
+      context: .
+      dockerfile: Mars-Rover.API/Dockerfile
+    ports: 
+      - '80:80'
+      - '443:443'
+  marsrover.db:
+    restart: on-failure
+    image: "postgis/postgis:14-3.2-alpine"
+    container_name: "marsrover.db"
+    environment:
+    - POSTGRES_USER=useryasin
+    - POSTGRES_PASSWORD=marsroverpassword
+    - POSTGRES_DB=marsroverdb
+    volumes:
+    - marsrover-db:/var/lib/postgresql/data
+    ports:
+    - "2025:5432"
+volumes:
+    marsrover-db:
+

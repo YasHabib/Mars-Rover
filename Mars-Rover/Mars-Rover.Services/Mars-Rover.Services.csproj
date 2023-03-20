@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mars-Rover.Repository\Mars-Rover.Repository.csproj" />
     <ProjectReference Include="..\Mars-Rover\Mars-Rover.WebApp.csproj" />
   </ItemGroup>
 

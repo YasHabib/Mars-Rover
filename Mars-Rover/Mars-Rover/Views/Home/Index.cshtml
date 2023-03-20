@@ -1,14 +1,28 @@
-﻿@{
+﻿@model IEnumerable<Mars_Rover.Models.ViewModels.RoverInputsVIewModel>
+@{
     ViewData["Title"] = "Rover path map";
-    
 }
 
 <div class="text-center">
     <h1 class="display-8">Rover path is displayed in the following grid</h1>
 </div>
 
-<ejs-chart id="container"></ejs-chart>
-<div>
+
+<ejs-chart id="container" title="Mars rover route" width="100%" height="100%">
+    <e-series-collection>
+        <e-series xName="X" width=2 yName="Y" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Line">
+            <e-data-manager url='' crossdomain="true"></e-data-manager>
+            <e-series-marker>
+                <e-series-datalabel visible="true" position="Top"></e-series-datalabel>
+            </e-series-marker>
+            <e-series-animation enable="true"></e-series-animation>
+        </e-series>
+    </e-series-collection>
+</ejs-chart>
+
+
+
+@*<div class="container">
    <select class="form-switch"></select>
    <button type="button" class="btn btn-outline-primary">Add a Rover</button>
 
@@ -30,5 +44,35 @@
             <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
         </div>
         <button type="submit" class="btn btn-outline-primary mt-2">Submit</button>
+        <div>
+            <label>RoverName</label>
+            <datalist></datalist>
+        </div>
    </div>
+</div>*@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <text>Please enter the max value for upper right coordinates of the plateau:</text><br />
+            <input />
+            <div>
+                <text>Rover 1 inputs:</text><br />
+                <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
+                <br /><br />
+                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
+            </div>
+            <br/>
+            <div>
+                <text>Rover 2 inputs:</text><br />
+                <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
+                <br /><br />
+                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
+            </div>
+        </div>
+        <div class="col-md-6"> 
+            <label>Rover Name</label>
+            <ejs-listbox id="listbox">
+            </ejs-listbox>
+        </div>
+    </div>
 </div>

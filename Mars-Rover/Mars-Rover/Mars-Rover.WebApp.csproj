@@ -1,18 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Mars_Rover</RootNamespace>
+    <UserSecretsId>c73a5190-a9e1-4098-a893-bb5183a10fc1</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="20.4.0.54" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repository\Interfaces\" />
   </ItemGroup>
 
 </Project>

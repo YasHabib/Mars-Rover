@@ -19,3 +19,5 @@ C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.Services\obj\Deb
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.Services\obj\Debug\net6.0\refint\Mars-Rover.Services.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.Services\obj\Debug\net6.0\Mars-Rover.Services.pdb
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.Services\obj\Debug\net6.0\ref\Mars-Rover.Services.dll
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.Services\bin\Debug\net6.0\Mars-Rover.Repository.dll
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.Services\bin\Debug\net6.0\Mars-Rover.Repository.pdb

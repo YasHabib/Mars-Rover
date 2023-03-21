@@ -16,10 +16,7 @@ C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Swashbuckle.AspNe
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Mars-Rover.Repository.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Syncfusion.EJ2.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Microsoft.OpenApi.dll
-C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Newtonsoft.Json.dll
-C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Syncfusion.Licensing.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Mars-Rover.API.pdb
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Mars-Rover.WebApp.pdb
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Mars-Rover.Services.pdb
@@ -40,3 +37,6 @@ C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Npgsql.EntityFram
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Npgsql.dll
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Syncfusion.EJ2.dll
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Newtonsoft.Json.dll
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\bin\Debug\Syncfusion.Licensing.dll

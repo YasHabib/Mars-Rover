@@ -9,6 +9,7 @@ namespace Mars_Rover.Repository.Interfaces
     public interface IUnitOfWork
     {
         IRoverRepository Rovers { get; }
+        IRoverPositionRepository RoverPositions { get; }
 
         Task SaveAsync();
     }

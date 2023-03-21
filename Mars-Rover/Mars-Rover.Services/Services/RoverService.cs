@@ -1,11 +1,14 @@
 ﻿using Mars_Rover.Models.Entities;
 using Mars_Rover.Models.Objects;
 using Mars_Rover.Models.ViewModels;
+using Mars_Rover.Repository;
 using Mars_Rover.Repository.Interfaces;
 using Mars_Rover.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Syncfusion.EJ2.Notifications;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Mars_Rover.Services.Services
@@ -37,9 +40,11 @@ namespace Mars_Rover.Services.Services
             return models;
         }
 
-        public Task<List<RoverPositionViewModel>> GetRoverHistory()
+        public async Task<List<RoverHistoryViewModel>> GetRoverHistory()
         {
-            throw new NotImplementedException();
+            var results = await _unitOfWork.RoverPositions.GetAll(i => i.Include(i => i.Rover).OrderBy(i => i.Rover.Name));
+            var models = results.Select(lists => new RoverHistoryViewModel(lists)).ToList();   
+            return models;
         }
 
         public Task MoveRover(RoverInputsVIewModel roverInputs)
@@ -150,11 +155,18 @@ namespace Mars_Rover.Services.Services
 
             var output = positionX.ToString() + " " + positionY.ToString() + " "+ positionOrientation;
 
+            //saving the data
+            var rover = await _unitOfWork.Rovers.GetById(roverInputs.RoverId);
+
+            var roverPositionData = new RoverPosition(roverInputs, rover.Id, output);
+            roverPositionData.Id = rover.Id;
+            roverPositionData.UserInput = roverInputs.InitialPosition + ", " + roverInputs.RouteInstructions;
+            roverPositionData.OutputResult = output;
+            _unitOfWork.RoverPositions.Create(roverPositionData);
+            await _unitOfWork.SaveAsync();
+
+            //returning output as response
             return output;
-
-            throw new NotImplementedException();
-
-
         }
 
         //----------------------Update-------------------------//

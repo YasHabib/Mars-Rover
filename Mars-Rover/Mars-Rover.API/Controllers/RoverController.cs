@@ -15,6 +15,7 @@ namespace Mars_Rover.Controllers
         {
             _roverInterface = roverInterface;   
         }
+        //----------------------Create --------------------------
 
         [HttpPost("create/rover")]
         public async Task<ActionResult> CreateRover(string name)
@@ -23,6 +24,7 @@ namespace Mars_Rover.Controllers
             return Ok();
         }
 
+        //-----------------------------retrieve data---------------------
         [HttpGet("rovers")]
         public async Task<ActionResult<List<RoverViewModel>>> GetRoverList()
         {
@@ -30,8 +32,17 @@ namespace Mars_Rover.Controllers
             return Ok(results);
         }
 
+        [HttpGet("rover-history")]
+        public async Task<ActionResult<List<RoverHistoryViewModel>>> GetRoverHistory()
+        {
+            var results = await _roverInterface.GetRoverHistory();
+            return Ok(results);
+        }
+        
+
+
         [HttpPost("setGridLimit")]
-        public async Task<ActionResult> SetGridLimit(string xycoordinates)
+        public async Task<ActionResult> SetGridLimit([FromBody]string xycoordinates)
         {
             string[] xy = xycoordinates.Split(" ");
             var upperX = Int32.Parse(xy[0]);
@@ -40,24 +51,10 @@ namespace Mars_Rover.Controllers
             return Ok(result);
         }
 
+        //-------------------Outputs----------------------
         [HttpPost("inputs")]
-        public async Task<ActionResult<string>> GetOutputBasedOnRoverInputs(RoverInputsVIewModel roverInputs)
+        public async Task<ActionResult<string>> GetOutputBasedOnRoverInputs([FromBody]RoverInputsVIewModel roverInputs)
         {
-            //Getting rover's current position
-            //string[] roverPosition = roverInputs.InitialPosition.Split(" ");
-            //int positionX;
-            //int positionY;
-            //Int32.TryParse(roverPosition[0], out positionX);
-            //Int32.TryParse(roverPosition[1], out positionY);
-            //var positionOrientation = roverPosition[2];
-
-            //_roverInterface.TurnLeft(positionOrientation);
-            //_roverInterface.TurnRight(positionOrientation);
-            //_roverInterface.MoveForward(positionX, positionY, positionOrientation);
-            
-
-            //await _roverInterface.SetInitialPosition(positionX, positionY, positionOrientation);
-
             var output = await _roverInterface.GetOutput(roverInputs);
             return output;
         }

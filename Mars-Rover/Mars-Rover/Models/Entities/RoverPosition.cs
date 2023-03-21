@@ -7,6 +7,10 @@ namespace Mars_Rover.Models.Entities
 {
     public class RoverPosition:BaseEntity<Guid>,IDated
     {
+        public RoverPosition()
+        {
+            
+        }
         //Constructor to add a rover's position into database
         public RoverPosition(RoverInputsVIewModel roverData, Guid roverId, string output)
         {
@@ -16,7 +20,7 @@ namespace Mars_Rover.Models.Entities
 
         }
         public Guid RoverId { get; set; }
-        public Rover Rover { get; set; }
+        public Rover? Rover { get; set; }
         public string UserInput { get; set; } = string.Empty;
         //public string ScreenshotIds { get; set; } = string.Empty;
         public string OutputResult { get; set; } = string.Empty;

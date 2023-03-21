@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/yasin/Desktop/IRISNDT/Mars-Rover/Mars-Rover/Mars-Rover/Views/Home/History.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIaXN0b3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/yasin/Desktop/IRISNDT/Mars-Rover/Mars-Rover/Mars-Rover/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

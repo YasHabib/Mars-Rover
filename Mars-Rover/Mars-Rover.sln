@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mars-Rover.Services", "Mars
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{DE43827D-63F0-4D8D-985A-660325E39D60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mars-Rover.Test", "..\Mars-Rover.Test\Mars-Rover.Test.csproj", "{2DAE1277-D005-46E1-835B-C8249664EA36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mars-Rover.Test", "..\Mars-Rover.Test\Mars-Rover.Test.csproj", "{2DAE1277-D005-46E1-835B-C8249664EA36}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DE799098-92B4-4287-A76B-82B496E1400E} = {DE799098-92B4-4287-A76B-82B496E1400E}
 	EndProjectSection

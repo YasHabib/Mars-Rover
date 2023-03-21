@@ -1,0 +1,26 @@
+﻿@using System.Data
+@model DataTable
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Rover Name</th>
+                <th>Instruction Given</th>
+                <th>Final Coordinate</th>
+                <th>Date moved</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(DataRow rover in Model.Rows)
+            {
+                <tr>
+                    <td>@rover["roverName"]</td>
+                    <td>@rover["userInput"]</td>
+                    <td>@rover["outputResult"]</td>
+                    <td>@rover["createdDate"]</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

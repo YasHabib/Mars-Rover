@@ -25,6 +25,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IRoverService, RoverService>();
 builder.Services.AddScoped<IRoverRepository, RoverRepository>();
+builder.Services.AddScoped<IRoverPositionRepository, RoverPositionRepository>();
 
 
 var app = builder.Build();
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

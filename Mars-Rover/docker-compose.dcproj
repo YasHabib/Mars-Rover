@@ -4,11 +4,11 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>de43827d-63f0-4d8d-985a-660325e39d60</ProjectGuid>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:2000/swagger/index.html</DockerServiceUrl>
   </PropertyGroup>
   <PropertyGroup>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceName>mars-rover.webapp</DockerServiceName>
+    <DockerServiceName>mars-rover.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

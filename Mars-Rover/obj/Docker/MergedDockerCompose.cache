@@ -18,44 +18,14 @@ services:
       protocol: tcp
     - mode: ingress
       target: 80
-      published: "80"
+      published: "2000"
       protocol: tcp
     - mode: ingress
       target: 443
       protocol: tcp
     - mode: ingress
       target: 443
-      published: "443"
-      protocol: tcp
-    volumes:
-    - type: bind
-      source: C:\Users\yasin\AppData\Roaming/Microsoft/UserSecrets
-      target: /root/.microsoft/usersecrets
-      read_only: true
-      bind:
-        create_host_path: true
-    - type: bind
-      source: C:\Users\yasin\AppData\Roaming/ASP.NET/Https
-      target: /root/.aspnet/https
-      read_only: true
-      bind:
-        create_host_path: true
-  mars-rover.webapp:
-    build:
-      context: C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover
-      dockerfile: Mars-Rover/Dockerfile
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: https://+:443;http://+:80
-    image: marsroverwebapp
-    networks:
-      default: null
-    ports:
-    - mode: ingress
-      target: 80
-      protocol: tcp
-    - mode: ingress
-      target: 443
+      published: "2020"
       protocol: tcp
     volumes:
     - type: bind

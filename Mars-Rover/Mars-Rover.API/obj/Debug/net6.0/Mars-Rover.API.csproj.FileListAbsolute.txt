@@ -66,3 +66,5 @@ C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.API\bin\Debug\ne
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.API\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.API\bin\Debug\net6.0\Mars-Rover.Repository.dll
 C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.API\bin\Debug\net6.0\Mars-Rover.Repository.pdb
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.API\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\yasin\Desktop\IRISNDT\Mars-Rover\Mars-Rover\Mars-Rover.API\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

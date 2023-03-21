@@ -1,11 +1,11 @@
 version: '3.4'
 
 services:
-  mars-rover.webapp:
-    image: ${DOCKER_REGISTRY-}marsroverwebapp
-    build:
-      context: .
-      dockerfile: Mars-Rover/Dockerfile
+  #mars-rover.webapp:
+  #  image: ${DOCKER_REGISTRY-}marsroverwebapp
+  #  build:
+  #    context: .
+  #    dockerfile: Mars-Rover/Dockerfile
 
   mars-rover.api:
     image: ${DOCKER_REGISTRY-}marsroverapi
@@ -13,8 +13,8 @@ services:
       context: .
       dockerfile: Mars-Rover.API/Dockerfile
     ports: 
-      - '80:80'
-      - '443:443'
+      - '2000:80'
+      - '2020:443'
   marsrover.db:
     restart: on-failure
     image: "postgis/postgis:14-3.2-alpine"

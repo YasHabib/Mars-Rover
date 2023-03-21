@@ -13,6 +13,7 @@ namespace Mars_Rover.Repository
         private readonly ApplicationDBContext _dbContext;
 
         private IRoverRepository _roverRepository;
+        private IRoverPositionRepository _roverPositionRepository;
 
         public IRoverRepository Rovers
         {
@@ -21,6 +22,16 @@ namespace Mars_Rover.Repository
                 if (_roverRepository == null)
                     _roverRepository = new RoverRepository(_dbContext);
                 return _roverRepository;
+            }
+        }
+
+        public IRoverPositionRepository RoverPositions
+        {
+            get
+            {
+                if (_roverPositionRepository == null)
+                    _roverPositionRepository = new RoverPositionRepository(_dbContext);
+                return _roverPositionRepository;
             }
         }
 

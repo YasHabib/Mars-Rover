@@ -38,10 +38,6 @@ namespace Mars_Rover.Repository.Migrations
                     b.Property<Guid>("RoverId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ScreenshotIds")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("UserInput")
                         .IsRequired()
                         .HasColumnType("text");
@@ -74,12 +70,17 @@ namespace Mars_Rover.Repository.Migrations
             modelBuilder.Entity("Mars_Rover.Models.Entities.RoverPosition", b =>
                 {
                     b.HasOne("Mars_Rover.Models.Objects.Rover", "Rover")
-                        .WithMany()
+                        .WithMany("RoverPositions")
                         .HasForeignKey("RoverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rover");
+                });
+
+            modelBuilder.Entity("Mars_Rover.Models.Objects.Rover", b =>
+                {
+                    b.Navigation("RoverPositions");
                 });
 #pragma warning restore 612, 618
         }

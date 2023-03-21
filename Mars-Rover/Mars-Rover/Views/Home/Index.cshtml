@@ -20,59 +20,35 @@
     </e-series-collection>
 </ejs-chart>
 
-
-
-@*<div class="container">
-   <select class="form-switch"></select>
-   <button type="button" class="btn btn-outline-primary">Add a Rover</button>
-
-   <div class="m-2">
-       <div>
-            <text>Please enter the max value for upper right coordinates of the plateau:</text><br />
-            <input/>
-       </div>
-        <div class="mt-3">
-            <text>Rover 1 inputs:</text><br />
-            <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
-            <br /><br />
-            <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
-       </div>
-        <div class="mt-3">
-            <text>Rover 2 inputs:</text><br />
-            <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
-            <br /><br />
-            <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
-        </div>
-        <button type="submit" class="btn btn-outline-primary mt-2">Submit</button>
-        <div>
-            <label>RoverName</label>
-            <datalist></datalist>
-        </div>
-   </div>
-</div>*@
 <div class="container">
     <div class="row">
+        
         <div class="col-md-6">
-            <text>Please enter the max value for upper right coordinates of the plateau:</text><br />
-            <input />
-            <div>
-                <text>Rover 1 inputs:</text><br />
-                <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
-                <br /><br />
-                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
-            </div>
-            <br/>
-            <div>
-                <text>Rover 2 inputs:</text><br />
-                <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
-                <br /><br />
-                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
-            </div>
+            <text>Enter max limit of the plateau:</text><br />
+            <span class="mb-3"><input /><button type="submit">Submit</button></span>
+            <br/><br/>
+            <ejs-dropdownlist id="rovers" width="200px" class="mt-2" placeholder="Select Rovers">
+                <e-data-manager url="/api/Rover/" adaptor="WebApiAdaptor"></e-data-manager>
+            </ejs-dropdownlist>
+
         </div>
-        <div class="col-md-6"> 
-            <label>Rover Name</label>
-            <ejs-listbox id="listbox">
-            </ejs-listbox>
+
+        <div class="col-md-6">
+            <div>
+                <Label>Bob the Rover (Rover 1) inputs:</Label><br />
+                <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
+                <br /><br />
+                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
+            </div>
+            <br />
+            <div>
+                <Label>Martian Hunter (Rover 2) inputs:</Label><br />
+                <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
+                <br /><br />
+                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
+            </div><br/>
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+            <label id="Output" class="form-label"></label>
         </div>
     </div>
 </div>

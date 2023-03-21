@@ -12,11 +12,12 @@ namespace Mars_Rover.Models.Entities
             
         }
         //Constructor to add a rover's position into database
-        public RoverPosition(RoverInputsVIewModel roverData, Guid roverId, string output)
+        public RoverPosition(RoverInputsVIewModel roverData, Guid roverId, string output, List<int> coordinates)
         {
             RoverId = roverId;
             UserInput = roverData.InitialPosition + ": " + roverData.RouteInstructions;
             OutputResult = output;
+            XYCoordinates = coordinates;
 
         }
         public Guid RoverId { get; set; }
@@ -25,6 +26,7 @@ namespace Mars_Rover.Models.Entities
         //public string ScreenshotIds { get; set; } = string.Empty;
         public string OutputResult { get; set; } = string.Empty;
         public DateTime CreatedDate { get; set; }
+        public List<int>? XYCoordinates { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Mars_Rover.Models.ViewModels
 {
-    [BindProperties]
+    //[BindProperties]
     public class RoverHistoryViewModel
     {
         public RoverHistoryViewModel(RoverPosition roverPosition)

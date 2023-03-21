@@ -1,12 +1,12 @@
 ﻿namespace Mars_Rover.Models.Entities
 {
-    public class Coordinates
+    public class TestCoordinates
     {
         public int XCoordinate;
         public int YCoordinate;
         public string Orientation;
 
-        public Coordinates(string currentPosition)
+        public TestCoordinates(string currentPosition)
         {
             Int32.TryParse(currentPosition.Split(" ")[0], out XCoordinate);
             Int32.TryParse(currentPosition.Split(" ")[1], out YCoordinate);

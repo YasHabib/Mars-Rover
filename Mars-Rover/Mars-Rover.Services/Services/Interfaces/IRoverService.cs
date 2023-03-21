@@ -19,11 +19,11 @@ namespace Mars_Rover.Services.Services.Interfaces
         //string TurnRight(string orientation);
         //int MoveForward(int x, int y, string orientation);
         Task MoveRover(RoverInputsVIewModel roverInputs);
-        Task<Coordinates> RoverDestination(string routeInstruction);
+        Task<TestCoordinates> RoverDestination(string routeInstruction);
 
 
         Task SaveScreenshot(string screenshotName);
-        Task<UpperCoordinateViewModel> ResizeGrid(int x, int y);
+        Task<CoordinateViewModel> ResizeGrid(int x, int y);
         Task<InitialPositionViewModel> SetInitialPosition(int x, int y, string orientation);
         Task<List<RoverHistoryViewModel>> GetRoverHistory();
         Task<string> GetOutput(RoverInputsVIewModel roverInputs);

@@ -7,6 +7,7 @@ using Mars_Rover.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Syncfusion.EJ2.Maps;
 using Syncfusion.EJ2.Notifications;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -74,8 +75,25 @@ namespace Mars_Rover.Services.Services
             Int32.TryParse(roverPosition[1], out positionY);
             var positionOrientation = roverPosition[2];
 
+            //adding initial position to a list of coordinates.NOTE: even index are X and odd index are Y
+            List<int> xyCoordinates = new List<int>();
+            xyCoordinates.Add(positionX);
+            xyCoordinates.Add(positionY);
+
             //---------Breaking down rover instruction---------------
             char[] routeInstruction = roverInputs.RouteInstructions.ToCharArray();
+
+
+            ////Checking how many times the rover will move
+            //int countM = 0;
+            //foreach (char m in routeInstruction)
+            //{
+            //    if(m == 'M')
+            //    {
+            //        countM++;
+            //    }
+            //}
+
 
             for (int i = 0; i<routeInstruction.Length; i++)
             {
@@ -138,13 +156,25 @@ namespace Mars_Rover.Services.Services
                         switch (positionOrientation)
                         {
                             case "N":
-                                positionY += 1; break;
+                                positionY += 1;
+                                xyCoordinates.Add(positionX);
+                                xyCoordinates.Add(positionY);
+                                break;
                             case "E":
-                                positionX += 1; break;
+                                positionX += 1;
+                                xyCoordinates.Add(positionX);
+                                xyCoordinates.Add(positionY);
+                                break;
                             case "S":
-                                positionY -= 1; break;
+                                positionY -= 1;
+                                xyCoordinates.Add(positionX);
+                                xyCoordinates.Add(positionY);
+                                break;
                             case "W":
-                                positionX -= 1; break;
+                                positionX -= 1;
+                                xyCoordinates.Add(positionX);
+                                xyCoordinates.Add(positionY);
+                                break;
                             default:
                                 throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
                         }
@@ -158,10 +188,11 @@ namespace Mars_Rover.Services.Services
             //saving the data
             var rover = await _unitOfWork.Rovers.GetById(roverInputs.RoverId);
 
-            var roverPositionData = new RoverPosition(roverInputs, rover.Id, output);
-            roverPositionData.Id = rover.Id;
+            var roverPositionData = new RoverPosition(roverInputs, rover.Id, output, xyCoordinates);
+            roverPositionData.RoverId = rover.Id;
             roverPositionData.UserInput = roverInputs.InitialPosition + ", " + roverInputs.RouteInstructions;
             roverPositionData.OutputResult = output;
+            roverPositionData.XYCoordinates = xyCoordinates;
             _unitOfWork.RoverPositions.Create(roverPositionData);
             await _unitOfWork.SaveAsync();
 
@@ -170,8 +201,7 @@ namespace Mars_Rover.Services.Services
         }
 
         //----------------------Update-------------------------//
-
-        public Task<Coordinates> RoverDestination(string routeInstruction)
+        public Task<TestCoordinates> RoverDestination(string routeInstruction)
         {
             throw new NotImplementedException();
         }
@@ -181,13 +211,13 @@ namespace Mars_Rover.Services.Services
             throw new NotImplementedException();
         }
 
-        public Task<UpperCoordinateViewModel> ResizeGrid(int x, int y)
-        {
-            var coordinates = new UpperCoordinateViewModel();
-            coordinates.XCoordinate = x;
-            coordinates.YCoordinate = y;
-            return Task.FromResult(coordinates);
-        }
+        //public Task<CoordinateViewModel> ResizeGrid(int x, int y)
+        //{
+        //    var coordinates = new CoordinateViewModel();
+        //    coordinates.XCoordinate = x;
+        //    coordinates.YCoordinate = y;
+        //    return Task.FromResult(coordinates);
+        //}
 
         public Task<InitialPositionViewModel> SetInitialPosition(int x, int y, string orientation)
         {
@@ -198,23 +228,30 @@ namespace Mars_Rover.Services.Services
             return Task.FromResult(coordinates);
         }
 
+        public Task<CoordinateViewModel> ResizeGrid(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
 
-        ////-----------Helper methods------------
+
+        //-------------Helper methods------------
+
+
         //public string TurnLeft(string currentOrientation)
         //{
-        //    switch(currentOrientation)
+        //    switch (currentOrientation)
         //    {
         //        case "N":
         //            currentOrientation = "W";
         //            return currentOrientation;
         //        case "W":
-        //            currentOrientation = "S"; 
+        //            currentOrientation = "S";
         //            return currentOrientation;
         //        case "S":
-        //            currentOrientation = "E"; 
+        //            currentOrientation = "E";
         //            return currentOrientation;
         //        case "E":
-        //            currentOrientation = "N"; 
+        //            currentOrientation = "N";
         //            return currentOrientation;
         //        default:
         //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");

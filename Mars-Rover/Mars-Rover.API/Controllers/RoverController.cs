@@ -24,6 +24,16 @@ namespace Mars_Rover.Controllers
             return Ok();
         }
 
+        [HttpPost("setGridLimit")]
+        public async Task<ActionResult<CoordinateViewModel>> SetGridLimit([FromBody] string xycoordinates)
+        {
+            string[] xy = xycoordinates.Split(" ");
+            var upperX = Int32.Parse(xy[0]);
+            var upperY = Int32.Parse(xy[1]);
+            var result = await _roverInterface.ResizeGrid(upperX, upperY);
+            return Ok(result);
+        }
+
         //-----------------------------retrieve data---------------------
         [HttpGet("rovers")]
         public async Task<ActionResult<List<RoverViewModel>>> GetRoverList()
@@ -39,22 +49,11 @@ namespace Mars_Rover.Controllers
             return Ok(results);
         }
 
-        [HttpGet("input-fields")]
-        public async Task<ActionResult<RoverInputsViewModel>> InputFieldsBasedOnSelectedRovers(Guid roverId)
+        [HttpGet("coordinates")]
+        public async Task<List<List<int>>> GetCoordinates(Guid roverPositionId)
         {
-            var input = await _roverInterface.InputFieldsBasedOnSelectedRoverIds(roverId);
-            return Ok(input);
-        }
-
-
-        [HttpPost("setGridLimit")]
-        public async Task<ActionResult<CoordinateViewModel>> SetGridLimit([FromBody]string xycoordinates)
-        {
-            string[] xy = xycoordinates.Split(" ");
-            var upperX = Int32.Parse(xy[0]);
-            var upperY = Int32.Parse(xy[1]);
-            var result = await _roverInterface.ResizeGrid(upperX, upperY);
-            return Ok(result);
+            var results = await _roverInterface.MoveRover(roverPositionId);
+            return results;
         }
 
         //-------------------Output----------------------

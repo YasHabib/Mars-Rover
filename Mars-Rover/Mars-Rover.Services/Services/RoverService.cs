@@ -47,9 +47,22 @@ namespace Mars_Rover.Services.Services
             return models;
         }
 
-        public Task MoveRover(RoverInputsViewModel roverInputs)
+        public async Task<List<List<int>>> MoveRover(Guid roverPositionId)
         {
-            throw new NotImplementedException();
+            var roverPosition = await _unitOfWork.RoverPositions.GetById(roverPositionId);
+            var coordinates = roverPosition.XYCoordinates.ToList();
+            List<int> Xcoords = new List<int>();
+            List<int> Ycoords = new List<int>();
+
+            for (int i = 0; i < coordinates.Count; i++)
+            {
+                if(i % 2 == 0) Xcoords.Add(coordinates[i]);
+                else Ycoords.Add(coordinates[i]);
+            }
+
+            return new List<List<int>> { Xcoords , Ycoords };
+
+            //throw new NotImplementedException();
         }
 
         
@@ -178,20 +191,29 @@ namespace Mars_Rover.Services.Services
             return Task.FromResult(coordinates);
         }
 
-        public async Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverId)
-        {
-            var rover = await _unitOfWork.Rovers.GetById(roverId);
+        //public async Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverId)
+        //{
+        //    var rover = await _unitOfWork.Rovers.GetById(roverId);
 
-            var model = new RoverInputsViewModel();
-            model.RoverId = roverId;
-            model.RoverName = rover.Name;
-            model.RouteInstructions = "";
-            model.InitialPosition = "";
-            return model;
-        }
+        //    var model = new RoverInputsViewModel(rover);
+        //    model.RoverId = roverId;
+        //    model.RouteInstructions = "";
+        //    model.InitialPosition = "";
+        //    return model;
+        //}
 
 
 
         //-------------Helper methods-----------
+
+        //public static List<List<T>> partition<T>(this List<T> values, int chunkSize)
+        //{
+        //    var partitions = new List<List<T>>();
+        //    for (int i = 0; i < values.Count; i += chunkSize)
+        //    {
+        //        partitions.Add(values.GetRange(i, Math.Min(chunkSize, values.Count - i)));
+        //    }
+        //    return partitions;
+        //}
     }
 }

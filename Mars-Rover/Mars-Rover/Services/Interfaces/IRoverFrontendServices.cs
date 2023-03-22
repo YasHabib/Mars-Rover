@@ -4,5 +4,6 @@ namespace Mars_Rover.Services.Interfaces
 {
     public interface IRoverFrontendServices
     {
+        Task<List<RoverHistoryViewModel>> ViewRoverHistory();
     }
 }

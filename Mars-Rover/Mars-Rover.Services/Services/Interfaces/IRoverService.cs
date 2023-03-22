@@ -16,11 +16,11 @@ namespace Mars_Rover.Services.Services.Interfaces
         Task<List<RoverViewModel>> GetRoverList();
 
         //------Rover's movement operations------
-        Task MoveRover(RoverInputsViewModel roverInputs);
+        Task<List<List<int>>> MoveRover(Guid roverPositionId);
         Task<TestCoordinates> RoverDestination(string routeInstruction);
 
         //Based on the rover(s) the end user selects, this will open empty input field to the end user.
-        Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverIds);
+        //Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverIds);
 
         Task SaveScreenshot(string screenshotName);
         Task<CoordinateViewModel> ResizeGrid(int x, int y);

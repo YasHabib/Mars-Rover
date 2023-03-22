@@ -40,7 +40,8 @@
                             @foreach(var rover in ViewData["RoverVM"] as List<RoverViewModel>)
                             {
                                 <tr>
-                                    <td><span>@rover.Name &nbsp; <input @rover.Id type ="checkbox" /></span></td>
+                                    <td>@rover.Name &nbsp; </td>
+                                    <td><input @rover.Id type="checkbox" /></td>
                                 </tr>
                             }
                         </tbody>
@@ -50,7 +51,7 @@
 
         <div class="col-md-6">
             <div>
-                <Label>Bob the Rover (Rover 1) inputs:</Label><br />
+@*                <Label>Bob the Rover (Rover 1) inputs:</Label><br />
                 <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
                 <br /><br />
                 <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
@@ -60,7 +61,28 @@
                 <Label>Martian Hunter (Rover 2) inputs:</Label><br />
                 <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
                 <br /><br />
-                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
+                <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>*@
+
+                <table class="table-active">
+                    <tbody>
+                        @foreach (var rover in ViewData["RoverVM"] as List<RoverViewModel>)
+                         {
+                             <tr>
+                                 <th>
+                                     @rover.Name
+                                 </th>
+                                 <td>
+                                    <span><text class="m-2">Line 1:</text><input placeholder="Enter Rover's position" /></span>
+                                </td>
+                                 <td>
+                                   <span><text class="m-2">Line 2:</text><input placeholder="Route instruction" /></span>
+                                 </td>
+                             </tr>
+
+                          }
+                    </tbody>
+
+                </table>
             </div><br/>
             <button type="submit" class="btn btn-outline-primary">Submit</button>
             <label id="Output" class="form-label"></label>

@@ -28,20 +28,20 @@ namespace Mars_Rover.Controllers
         }
 
 
-        [HttpGet]
+        //[HttpGet]
         public async Task<IActionResult> Index()
         {
-
-
             //To remove SSL certificate error
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             // Pass the handler to httpclient
             HttpClient client = new HttpClient(clientHandler, false);
 
-
             //Getting list of rovers
             List<RoverViewModel> rovers = new List<RoverViewModel>();
+
+            //Getting inputs based on selected rover
+            //List<RoverInputsViewModel> roverInputs = new List<RoverInputsViewModel>();
 
             using (client)
             {
@@ -49,25 +49,37 @@ namespace Mars_Rover.Controllers
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                //Rover list
                 HttpResponseMessage getRovers = await client.GetAsync("/api/Rover/rovers");
                 if (getRovers.IsSuccessStatusCode)
                 {
                     string results = getRovers.Content.ReadAsStringAsync().Result;
-                    //rovers = JsonConvert.DeserializeObject<List<RoverViewModel>>(results);
                     rovers = JsonConvert.DeserializeObject<List<RoverViewModel>>(results);
-
                 }
                 else
                 {
                     throw new Exception("There was an error getting the rover data");
                 }
                 ViewData["RoverVM"] = rovers;
+
+                ////Input lists based on selected rover
+                //HttpResponseMessage displayRoverInputs = await client.GetAsync("/api/Rover/input-fields");
+                //if (getRovers.IsSuccessStatusCode)
+                //{
+                //    string response = displayRoverInputs.Content.ReadAsStringAsync().Result;
+                //    roverInputs = JsonConvert.DeserializeObject<List<RoverInputsViewModel>>(response);
+                //}
+                //else
+                //{
+                //    throw new Exception("There was an error getting the rover data");
+                //}
+                //ViewData["RoverInputVM"] = roverInputs;
             }
 
             return View();
         }
 
-        [HttpGet]
+        //[HttpGet]
         public async Task<IActionResult> History()
         {
             //To remove SSL certificate error
@@ -81,8 +93,8 @@ namespace Mars_Rover.Controllers
             using (client)
             {
                 client.BaseAddress = new Uri(BasePath);
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage getRoverData = await client.GetAsync("/api/Rover/rover-history");
                 if (getRoverData.IsSuccessStatusCode)

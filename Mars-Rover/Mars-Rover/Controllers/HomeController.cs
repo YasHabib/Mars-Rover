@@ -101,13 +101,6 @@ namespace Mars_Rover.Controllers
             return View();
         }
 
-        //public ActionResult IndexModelsDisplay()
-        //{
-        //    IndexViewModel indexVM = new IndexViewModel();
-        //    indexVM.RoverVM = Index();
-        //    indexVM.RoverInputsVM = RoverInputsVIewModel();
-        //}
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

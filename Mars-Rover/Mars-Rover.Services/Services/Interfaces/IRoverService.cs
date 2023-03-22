@@ -10,22 +10,23 @@ namespace Mars_Rover.Services.Services.Interfaces
 {
     public interface IRoverService
     {
-        //------Basic CRUD operations---------
+        //------Basic CRUD operations--------
+        //Endpoint only access from Swagger UI there are not requirement to create rover for the end user
         Task CreateRover(string roverName);
         Task<List<RoverViewModel>> GetRoverList();
 
         //------Rover's movement operations------
-        //string TurnLeft(string orientation);
-        //string TurnRight(string orientation);
-        //int MoveForward(int x, int y, string orientation);
-        Task MoveRover(RoverInputsVIewModel roverInputs);
+        Task MoveRover(RoverInputsViewModel roverInputs);
         Task<TestCoordinates> RoverDestination(string routeInstruction);
 
+        //Based on the rover(s) the end user selects, this will open empty input field to the end user.
+        Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverIds);
 
         Task SaveScreenshot(string screenshotName);
         Task<CoordinateViewModel> ResizeGrid(int x, int y);
-        Task<InitialPositionViewModel> SetInitialPosition(int x, int y, string orientation);
         Task<List<RoverHistoryViewModel>> GetRoverHistory();
-        Task<string> GetOutput(RoverInputsVIewModel roverInputs);
+
+        //Get the output and save the rover movement data into database
+        Task<string> GetOutput(RoverInputsViewModel roverInputs);
     }
 }

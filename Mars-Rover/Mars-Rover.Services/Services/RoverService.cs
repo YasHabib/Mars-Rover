@@ -47,22 +47,14 @@ namespace Mars_Rover.Services.Services
             return models;
         }
 
-        public Task MoveRover(RoverInputsVIewModel roverInputs)
+        public Task MoveRover(RoverInputsViewModel roverInputs)
         {
             throw new NotImplementedException();
         }
 
         
-        public async Task<string> GetOutput(RoverInputsVIewModel roverInputs)
+        public async Task<string> GetOutput(RoverInputsViewModel roverInputs)
         {
-            //var rover = await _unitOfWork.Rovers.GetById(roverInputs.RoverId);
-
-            //storing the input data in-memory
-            //var roverPositionData = new RoverPosition(roverInputs, rover.Id, output);
-            //roverPositionData.Id = rover.Id;
-            //rover
-
-            //string[] upperLimit = roverInputs.UpperCoordinates.Split(" ");
 
 
             //------------Setting initial position and location of rover------------
@@ -82,42 +74,8 @@ namespace Mars_Rover.Services.Services
             //---------Breaking down rover instruction---------------
             char[] routeInstruction = roverInputs.RouteInstructions.ToCharArray();
 
-
-            ////Checking how many times the rover will move
-            //int countM = 0;
-            //foreach (char m in routeInstruction)
-            //{
-            //    if(m == 'M')
-            //    {
-            //        countM++;
-            //    }
-            //}
-
-
             for (int i = 0; i<routeInstruction.Length; i++)
             {
-
-                //switch(routeInstruction[i])
-                //{
-                //    case 'L': 
-                //        newOrientation = TurnLeft(positionOrientation);           
-                //        break;
-                //    case 'R': 
-                //        newOrientation = TurnRight(positionOrientation); 
-                //        break;
-                //    case 'M': 
-                //        xyCheck = MoveForward(positionX, positionY, positionOrientation); 
-                //        //if X coordinate has changed
-                //        if(xyCheck == positionX)
-                //        {
-                //            newPositionX = xyCheck; newPositionY = positionY;
-                //        }
-                //        else
-                //        {
-                //            newPositionY = xyCheck; newPositionX = positionX;
-                //        }
-                //        break;
-                //    default: throw new Exception("Unidefined parameter entered, please use either L, R or M");
 
                 switch (routeInstruction[i])
                 {
@@ -220,78 +178,20 @@ namespace Mars_Rover.Services.Services
             return Task.FromResult(coordinates);
         }
 
-        public Task<InitialPositionViewModel> SetInitialPosition(int x, int y, string orientation)
+        public async Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverId)
         {
-            var coordinates = new InitialPositionViewModel();
-            coordinates.CurrentPositionX = x;
-            coordinates.CurrentPositionY = y;
-            coordinates.CurrentOrientation = orientation;
-            return Task.FromResult(coordinates);
+            var rover = await _unitOfWork.Rovers.GetById(roverId);
+
+            var model = new RoverInputsViewModel();
+            model.RoverId = roverId;
+            model.RoverName = rover.Name;
+            model.RouteInstructions = "";
+            model.InitialPosition = "";
+            return model;
         }
 
 
-        //-------------Helper methods------------
 
-
-        //public string TurnLeft(string currentOrientation)
-        //{
-        //    switch (currentOrientation)
-        //    {
-        //        case "N":
-        //            currentOrientation = "W";
-        //            return currentOrientation;
-        //        case "W":
-        //            currentOrientation = "S";
-        //            return currentOrientation;
-        //        case "S":
-        //            currentOrientation = "E";
-        //            return currentOrientation;
-        //        case "E":
-        //            currentOrientation = "N";
-        //            return currentOrientation;
-        //        default:
-        //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
-
-        //    }
-        //}
-
-        //public string TurnRight(string currentOrientation)
-        //{
-        //    switch (currentOrientation)
-        //    {
-        //        case "N":
-        //            currentOrientation = "E";
-        //            return currentOrientation;
-        //        case "E":
-        //            currentOrientation = "S";
-        //            return currentOrientation;
-        //        case "S":
-        //            currentOrientation = "W";
-        //            return currentOrientation;
-        //        case "W":
-        //            currentOrientation = "N";
-        //            return currentOrientation;
-        //        default:
-        //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
-        //    }
-        //}
-
-        //public int MoveForward(int x, int y, string orientation) 
-        //{
-
-        //    switch (orientation)
-        //    {
-        //        case "N":
-        //            y += 1; return y;
-        //        case "E":
-        //            x += 1; return x;
-        //        case "S":
-        //            y -= 1; return y;
-        //        case "W":
-        //            x -= 1; return x;
-        //        default:
-        //            throw new Exception("Unidefined parameter entered, please use this format X Y Orientation");
-        //    }
-        //}
+        //-------------Helper methods-----------
     }
 }

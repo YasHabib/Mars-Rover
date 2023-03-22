@@ -38,8 +38,13 @@ namespace Mars_Rover.Controllers
             var results = await _roverInterface.GetRoverHistory();
             return Ok(results);
         }
-        
 
+        [HttpGet("input-fields")]
+        public async Task<ActionResult<RoverInputsViewModel>> InputFieldsBasedOnSelectedRovers(Guid roverId)
+        {
+            var input = await _roverInterface.InputFieldsBasedOnSelectedRoverIds(roverId);
+            return Ok(input);
+        }
 
 
         [HttpPost("setGridLimit")]
@@ -52,9 +57,9 @@ namespace Mars_Rover.Controllers
             return Ok(result);
         }
 
-        //-------------------Outputs----------------------
-        [HttpPost("inputs")]
-        public async Task<ActionResult<string>> GetOutputBasedOnRoverInputs([FromBody]RoverInputsVIewModel roverInputs)
+        //-------------------Output----------------------
+        [HttpPost("rovers/input")]
+        public async Task<ActionResult<string>> GetOutputBasedOnRoverInputs([FromBody]RoverInputsViewModel roverInputs)
         {
             var output = await _roverInterface.GetOutput(roverInputs);
             return output;

@@ -12,7 +12,7 @@ namespace Mars_Rover.Models.Entities
             
         }
         //Constructor to add a rover's position into database
-        public RoverPosition(RoverInputsVIewModel roverData, Guid roverId, string output, List<int> coordinates)
+        public RoverPosition(RoverInputsViewModel roverData, Guid roverId, string output, List<int> coordinates)
         {
             RoverId = roverId;
             UserInput = roverData.InitialPosition + ": " + roverData.RouteInstructions;

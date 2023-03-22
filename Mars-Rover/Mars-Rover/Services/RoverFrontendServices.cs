@@ -1,6 +1,5 @@
 ﻿using Mars_Rover.Helpers;
 using Mars_Rover.Models.Entities;
-using Mars_Rover.Models.Objects;
 using Mars_Rover.Models.ViewModels;
 using Mars_Rover.Services.Interfaces;
 using Newtonsoft.Json;

@@ -1,5 +1,4 @@
 ﻿using Mars_Rover.Models.Entities;
-using Mars_Rover.Models.Objects;
 using Mars_Rover.Models.ViewModels;
 using Mars_Rover.Repository;
 using Mars_Rover.Repository.Interfaces;
@@ -189,10 +188,12 @@ namespace Mars_Rover.Services.Services
             var rover = await _unitOfWork.Rovers.GetById(roverInputs.RoverId);
 
             var roverPositionData = new RoverPosition(roverInputs, rover.Id, output, xyCoordinates);
+
             roverPositionData.RoverId = rover.Id;
             roverPositionData.UserInput = roverInputs.InitialPosition + ", " + roverInputs.RouteInstructions;
             roverPositionData.OutputResult = output;
             roverPositionData.XYCoordinates = xyCoordinates;
+
             _unitOfWork.RoverPositions.Create(roverPositionData);
             await _unitOfWork.SaveAsync();
 
@@ -211,13 +212,13 @@ namespace Mars_Rover.Services.Services
             throw new NotImplementedException();
         }
 
-        //public Task<CoordinateViewModel> ResizeGrid(int x, int y)
-        //{
-        //    var coordinates = new CoordinateViewModel();
-        //    coordinates.XCoordinate = x;
-        //    coordinates.YCoordinate = y;
-        //    return Task.FromResult(coordinates);
-        //}
+        public Task<CoordinateViewModel> ResizeGrid(int x, int y)
+        {
+            var coordinates = new CoordinateViewModel();
+            coordinates.XCoordinate = x;
+            coordinates.YCoordinate = y;
+            return Task.FromResult(coordinates);
+        }
 
         public Task<InitialPositionViewModel> SetInitialPosition(int x, int y, string orientation)
         {
@@ -226,11 +227,6 @@ namespace Mars_Rover.Services.Services
             coordinates.CurrentPositionY = y;
             coordinates.CurrentOrientation = orientation;
             return Task.FromResult(coordinates);
-        }
-
-        public Task<CoordinateViewModel> ResizeGrid(int x, int y)
-        {
-            throw new NotImplementedException();
         }
 
 

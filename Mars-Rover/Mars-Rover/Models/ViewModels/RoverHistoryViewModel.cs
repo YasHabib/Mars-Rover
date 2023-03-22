@@ -1,5 +1,4 @@
 ﻿using Mars_Rover.Models.Entities;
-using Mars_Rover.Models.Objects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mars_Rover.Models.ViewModels

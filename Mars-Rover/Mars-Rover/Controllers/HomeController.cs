@@ -1,6 +1,6 @@
 ﻿using Mars_Rover.Models;
 using Mars_Rover.Models.Entities;
-using Mars_Rover.Models.Objects;
+using Mars_Rover.Models.FrontendViewModels;
 using Mars_Rover.Models.ViewModels;
 using Mars_Rover.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +9,8 @@ using Syncfusion.EJ2.Base;
 using System.Data;
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using System.Dynamic;
+
 namespace Mars_Rover.Controllers
 {
     public class HomeController : Controller
@@ -16,7 +18,6 @@ namespace Mars_Rover.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IRoverFrontendServices _roverFrontendServices;
         public const string BasePath = "http://localhost:2000";
-        //public const string BasePath = "http://host.docker.internal:2000\r\n";
 
 
 
@@ -28,31 +29,60 @@ namespace Mars_Rover.Controllers
 
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
-            return View();
 
-        }
-
-        public async Task<IActionResult> History()
-        {
-            //TO remove SSL certificate error
+            //To remove SSL certificate error
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
             // Pass the handler to httpclient
             HttpClient client = new HttpClient(clientHandler, false);
 
 
-            DataTable dt = new DataTable();
+            //Getting list of rovers
+            List<RoverViewModel> rovers = new List<RoverViewModel>();
 
-            //var history = await _roverFrontendServices.ViewRoverHistory();
-            //return View(history);
             using (client)
             {
                 client.BaseAddress = new Uri(BasePath);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage getRovers = await client.GetAsync("/api/Rover/rovers");
+                if (getRovers.IsSuccessStatusCode)
+                {
+                    string results = getRovers.Content.ReadAsStringAsync().Result;
+                    //rovers = JsonConvert.DeserializeObject<List<RoverViewModel>>(results);
+                    rovers = JsonConvert.DeserializeObject<List<RoverViewModel>>(results);
+
+                }
+                else
+                {
+                    throw new Exception("There was an error getting the rover data");
+                }
+                ViewData["RoverVM"] = rovers;
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> History()
+        {
+            //To remove SSL certificate error
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            // Pass the handler to httpclient
+            HttpClient client = new HttpClient(clientHandler, false);
+
+            DataTable dt = new DataTable();
+
+            using (client)
+            {
+                client.BaseAddress = new Uri(BasePath);
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage getRoverData = await client.GetAsync("/api/Rover/rover-history");
                 if (getRoverData.IsSuccessStatusCode)
@@ -70,6 +100,13 @@ namespace Mars_Rover.Controllers
 
             return View();
         }
+
+        //public ActionResult IndexModelsDisplay()
+        //{
+        //    IndexViewModel indexVM = new IndexViewModel();
+        //    indexVM.RoverVM = Index();
+        //    indexVM.RoverInputsVM = RoverInputsVIewModel();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -41,8 +41,9 @@ namespace Mars_Rover.Controllers
         
 
 
+
         [HttpPost("setGridLimit")]
-        public async Task<ActionResult> SetGridLimit([FromBody]string xycoordinates)
+        public async Task<ActionResult<CoordinateViewModel>> SetGridLimit([FromBody]string xycoordinates)
         {
             string[] xy = xycoordinates.Split(" ");
             var upperX = Int32.Parse(xy[0]);

@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Mars_Rover.Models.ViewModels.RoverInputsVIewModel>
+﻿
+@using Mars_Rover.Models.ViewModels
 @{
-    ViewData["Title"] = "Rover path map";
+    ViewData["Title"] = "Rover path map";    
 }
+
 
 <div class="text-center">
     <h1 class="display-8">Rover path is displayed in the following grid</h1>
@@ -27,10 +29,23 @@
             <text>Enter max limit of the plateau:</text><br />
             <span class="mb-3"><input /><button type="submit">Submit</button></span>
             <br/><br/>
-            <ejs-dropdownlist id="rovers" width="200px" class="mt-2" placeholder="Select Rovers">
-                <e-data-manager url="/api/Rover/" adaptor="WebApiAdaptor"></e-data-manager>
-            </ejs-dropdownlist>
-
+            <div>
+                <table class="table-active">
+                    <thead>
+                        <tr>
+                           <th>Select the rovers you would like to launch</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach(var rover in ViewData["RoverVM"] as List<RoverViewModel>)
+                            {
+                                <tr>
+                                    <td><span>@rover.Name &nbsp; <input @rover.Id type ="checkbox" /></span></td>
+                                </tr>
+                            }
+                        </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="col-md-6">

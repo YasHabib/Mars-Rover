@@ -1,4 +1,4 @@
-﻿using Mars_Rover.Models.Objects;
+﻿using Mars_Rover.Models.Entities;
 using Mars_Rover.Repository.Interfaces;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
 ﻿using Mars_Rover.Models.Entities.Interfaces;
-using Mars_Rover.Models.Objects;
+using Mars_Rover.Models.Entities;
 using Mars_Rover.Models.ViewModels;
 using System.ComponentModel.DataAnnotations;
 

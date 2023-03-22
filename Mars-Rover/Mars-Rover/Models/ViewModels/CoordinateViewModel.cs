@@ -4,7 +4,7 @@ namespace Mars_Rover.Models.ViewModels
 {
     public class CoordinateViewModel
     {
-        public int XCoordinates { get; set; }
-        public int YCoordinates { get; set; }
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set; }
     }
 }

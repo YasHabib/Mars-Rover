@@ -17,6 +17,11 @@ namespace Mars_Rover.Controllers
         }
         //----------------------Create --------------------------
 
+        /// <summary>
+        /// Creates a rover by taking a string as the name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("create/rover")]
         public async Task<ActionResult> CreateRover(string name)
         {
@@ -24,6 +29,11 @@ namespace Mars_Rover.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Takes a string (ie.  "5 5"), and retuns as x/y coordinates
+        /// </summary>
+        /// <param name="xycoordinates"></param>
+        /// <returns></returns>
         [HttpPost("setGridLimit")]
         public async Task<ActionResult<CoordinateViewModel>> SetGridLimit([FromBody] string xycoordinates)
         {
@@ -35,12 +45,22 @@ namespace Mars_Rover.Controllers
         }
 
         //-----------------------------retrieve data---------------------
+
+        /// <summary>
+        /// Gets a list of rovers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("rovers")]
         public async Task<ActionResult<List<RoverViewModel>>> GetRoverList()
         {
             var results = await _roverInterface.GetRoverList();
             return Ok(results);
         }
+
+        /// <summary>
+        /// Gets a list of rovers with their position history
+        /// </summary>
+        /// <returns></returns>
 
         [HttpGet("rover-history")]
         public async Task<ActionResult<List<RoverHistoryViewModel>>> GetRoverHistory()
@@ -49,6 +69,11 @@ namespace Mars_Rover.Controllers
             return Ok(results);
         }
 
+        /// <summary>
+        /// Converts the list of coordinate and outputs 2 list of integers as X and Y coordinates
+        /// </summary>
+        /// <param name="roverPositionId"></param>
+        /// <returns></returns>
         [HttpGet("coordinates")]
         public async Task<List<List<int>>> GetCoordinates(Guid roverPositionId)
         {
@@ -56,7 +81,24 @@ namespace Mars_Rover.Controllers
             return results;
         }
 
+        /// <summary>
+        /// Retrieves a list of rovers based on the ID selected by the end user
+        /// </summary>
+        /// <param name="roverIds"></param>
+        /// <returns></returns>
+        [HttpGet("roverListByIds")]
+        public async Task<List<RoverViewModel>> GetRoversByIds([FromQuery] List<Guid> roverIds)
+        {
+            var results = await _roverInterface.GetRoversBasedOnIds(roverIds);
+            return results;
+        }
+
         //-------------------Output----------------------
+        /// <summary>
+        /// Takes the rover-input (line 1 and line 2), converts it to the final output, converts that data into the coordinates the rover took and save all these data into repository
+        /// </summary>
+        /// <param name="roverInputs"></param>
+        /// <returns></returns>
         [HttpPost("rovers/input")]
         public async Task<ActionResult<string>> GetOutputBasedOnRoverInputs([FromBody]RoverInputsViewModel roverInputs)
         {

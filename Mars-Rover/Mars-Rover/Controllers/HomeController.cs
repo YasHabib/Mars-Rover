@@ -40,14 +40,15 @@ namespace Mars_Rover.Controllers
             //Getting list of rovers
             List<RoverViewModel> rovers = new List<RoverViewModel>();
 
-            //Getting inputs based on selected rover
-            //List<RoverInputsViewModel> roverInputs = new List<RoverInputsViewModel>();
+            //Getting rovers based on selected Ids
+            List<RoverViewModel> selectedRovers = new List<RoverViewModel>();
 
             using (client)
             {
                 client.BaseAddress = new Uri(BasePath);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
 
                 //Rover list
                 HttpResponseMessage getRovers = await client.GetAsync("/api/Rover/rovers");
@@ -62,18 +63,20 @@ namespace Mars_Rover.Controllers
                 }
                 ViewData["RoverVM"] = rovers;
 
-                ////Input lists based on selected rover
-                //HttpResponseMessage displayRoverInputs = await client.GetAsync("/api/Rover/input-fields");
-                //if (getRovers.IsSuccessStatusCode)
-                //{
-                //    string response = displayRoverInputs.Content.ReadAsStringAsync().Result;
-                //    roverInputs = JsonConvert.DeserializeObject<List<RoverInputsViewModel>>(response);
-                //}
-                //else
-                //{
-                //    throw new Exception("There was an error getting the rover data");
-                //}
-                //ViewData["RoverInputVM"] = roverInputs;
+
+
+                //View selected rovers
+                HttpResponseMessage displayRoverInputs = await client.GetAsync("/api/Rover/roverListByIds");
+                if (getRovers.IsSuccessStatusCode)
+                {
+                    string response = displayRoverInputs.Content.ReadAsStringAsync().Result;
+                    selectedRovers = JsonConvert.DeserializeObject<List<RoverViewModel>>(response);
+                }
+                else
+                {
+                    throw new Exception("There was an error getting the rover data");
+                }
+                ViewData["SelectedRoverVM"] = selectedRovers;
             }
 
             return View();

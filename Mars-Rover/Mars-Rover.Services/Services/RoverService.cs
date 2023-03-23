@@ -4,6 +4,7 @@ using Mars_Rover.Repository;
 using Mars_Rover.Repository.Interfaces;
 using Mars_Rover.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Syncfusion.EJ2.Maps;
@@ -42,7 +43,7 @@ namespace Mars_Rover.Services.Services
 
         public async Task<List<RoverHistoryViewModel>> GetRoverHistory()
         {
-            var results = await _unitOfWork.RoverPositions.GetAll(i => i.Include(i => i.Rover).OrderBy(i => i.Rover.Name));
+            var results = await _unitOfWork.RoverPositions.GetAll(i => i.Include(i => i.Rover).OrderBy(i => i.Rover.Name).ThenByDescending(i => i.CreatedDate));
             var models = results.Select(lists => new RoverHistoryViewModel(lists)).ToList();   
             return models;
         }
@@ -61,11 +62,21 @@ namespace Mars_Rover.Services.Services
             }
 
             return new List<List<int>> { Xcoords , Ycoords };
-
-            //throw new NotImplementedException();
         }
 
-        
+        public async Task<List<RoverViewModel>> GetRoversBasedOnIds(List<Guid> roverIds)
+        {
+            List<RoverViewModel> roverModels = new List<RoverViewModel>();
+            foreach (var roverId in roverIds)
+            {
+                var rover = await _unitOfWork.Rovers.GetById(roverId);
+                var model = new RoverViewModel(rover);
+                roverModels.Add(model);
+            }
+            return roverModels;
+        }
+
+
         public async Task<string> GetOutput(RoverInputsViewModel roverInputs)
         {
 
@@ -172,12 +183,6 @@ namespace Mars_Rover.Services.Services
             return output;
         }
 
-        //----------------------Update-------------------------//
-        public Task<TestCoordinates> RoverDestination(string routeInstruction)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task SaveScreenshot(string screenshotName)
         {
             throw new NotImplementedException();
@@ -191,29 +196,7 @@ namespace Mars_Rover.Services.Services
             return Task.FromResult(coordinates);
         }
 
-        //public async Task<RoverInputsViewModel> InputFieldsBasedOnSelectedRoverIds(Guid roverId)
-        //{
-        //    var rover = await _unitOfWork.Rovers.GetById(roverId);
-
-        //    var model = new RoverInputsViewModel(rover);
-        //    model.RoverId = roverId;
-        //    model.RouteInstructions = "";
-        //    model.InitialPosition = "";
-        //    return model;
-        //}
-
-
-
         //-------------Helper methods-----------
 
-        //public static List<List<T>> partition<T>(this List<T> values, int chunkSize)
-        //{
-        //    var partitions = new List<List<T>>();
-        //    for (int i = 0; i < values.Count; i += chunkSize)
-        //    {
-        //        partitions.Add(values.GetRange(i, Math.Min(chunkSize, values.Count - i)));
-        //    }
-        //    return partitions;
-        //}
     }
 }
